@@ -42,18 +42,18 @@ async def api_get_beatmaps(**params: Any) -> Optional[list[dict[str, Any]]]:
     if app.settings.DEBUG:
         log(f"Doing api (getbeatmaps) request {params}", Ansi.LMAGENTA)
 
-    if app.settings.OSU_API_KEY:
-        # https://github.com/ppy/osu-api/wiki#apiget_beatmaps
-        url = "https://old.ppy.sh/api/get_beatmaps"
-        params["k"] = str(app.settings.OSU_API_KEY)
-    else:
-        # https://osu.direct/doc
-        url = "https://osu.direct/api/get_beatmaps"
+    # if app.settings.OSU_API_KEY:
+    #     # https://github.com/ppy/osu-api/wiki#apiget_beatmaps
+    #     url = "https://old.ppy.sh/api/get_beatmaps"
+    #     params["k"] = str(app.settings.OSU_API_KEY)
+    # else:
+    #     # https://osu.direct/doc
+    #     url = "https://osu.direct/api/get_beatmaps"
 
-    async with app.state.services.http_client.get(url, params=params) as response:
-        response_data = await response.json()
-        if response.status == 200 and response_data:  # (data may be [])
-            return response_data
+    # async with app.state.services.http_client.get(url, params=params) as response:
+    #     response_data = await response.json()
+    #     if response.status == 200 and response_data:  # (data may be [])
+    #         return response_data
 
     return None
 

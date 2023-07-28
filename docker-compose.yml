@@ -2,6 +2,9 @@ version: "3"
 
 services:
   mysql:
+    networks:
+      - default
+      - internet
     image: mysql:latest
     environment:
       MYSQL_USER: ${DB_USER}
@@ -49,6 +52,9 @@ services:
       - .env:/home/bpyuser/.env:ro
 
   nginx:
+    networks:
+      - default
+      - internet
     build:
       context: ./docker/nginx-with-geoip2
       args:
@@ -79,3 +85,6 @@ volumes:
 networks:
   default:
     name: bpy-network
+    internal: true
+  internet:
+    name: internet

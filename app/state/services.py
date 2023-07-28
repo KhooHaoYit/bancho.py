@@ -152,18 +152,10 @@ def fetch_geoloc_cloudflare(
     headers: Mapping[str, str],
 ) -> Optional[Geolocation]:
     """Fetch geolocation data based on ip (using cloudflare headers)."""
-    if not all(
-        key in headers for key in ("CF-IPCountry", "CF-IPLatitude", "CF-IPLongitude")
-    ):
-        return
-
-    country_code = headers["CF-IPCountry"].lower()
-    latitude = float(headers["CF-IPLatitude"])
-    longitude = float(headers["CF-IPLongitude"])
-
+    country_code = "my"
     return {
-        "latitude": latitude,
-        "longitude": longitude,
+        "latitude": 0,
+        "longitude": 0,
         "country": {
             "acronym": country_code,
             "numeric": country_codes[country_code],
